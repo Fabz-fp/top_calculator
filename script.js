@@ -1,6 +1,8 @@
-let num1 = "";
-let num2 = "";
-let operator = "";
+let firstNum = null;
+let secondNum = null;
+let currentOperator = null;
+
+const display = document.getElementById("display");
 
 function add(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
