@@ -1,9 +1,11 @@
 let firstNum = null;
 let secondNum = null;
 let currentOperator = null;
+let shouldResetDisplay = false;
 
 const display = document.getElementById("display");
 
+// Operations
 function add(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
 function multiply(a, b) { return a * b; }
@@ -24,3 +26,17 @@ function operate(operator, num1, num2) {
         default: return null;
     }
 }
+
+// Display
+function appendNumber(num) {
+    if(display.textContent === "0" || shouldResetDisplay) {
+        display.textContent = num;
+        shouldResetDisplay = false;
+    } else {
+        display.textContent += num;
+    }
+}
+
+document.querySelectorAll(".digit").forEach(btn =>
+    btn.addEventListener("click", () => appendNumber(btn.textContent))
+);
