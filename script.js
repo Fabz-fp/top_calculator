@@ -51,7 +51,7 @@ function handleOperator(operator) {
         let result = operate(currentOperator, firstNum, secondNum);
 
         if(typeof result === "number") {
-            result = Math.round(result * 100000) / 100000;
+            result = Math.round(result * 100) / 100;
         }
 
         display.textContent = result;
