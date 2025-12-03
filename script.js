@@ -5,6 +5,14 @@ let shouldResetDisplay = false;
 
 const display = document.getElementById("display");
 
+const digitButtons = document.querySelectorAll(".digit");
+
+const operatorButtons = document.querySelectorAll(".operator");
+
+const equalsButton = document.getElementById("equals");
+
+const clearButton = document.getElementById("clear");
+
 // Operations
 function add(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
@@ -37,6 +45,43 @@ function appendNumber(num) {
     }
 }
 
-document.querySelectorAll(".digit").forEach(btn =>
+function handleOperator(operator) {
+    if(currentOperator && !shouldResetDisplay) {
+        secondNum = display.textContent;
+        let result = operate(currentOperator, firstNum, secondNum);
+
+        if(typeof result === "number") {
+            result = Math.round(result * 100000) / 100000;
+        }
+
+        display.textContent = result;
+        firstNum = result;
+    } else {
+        firstNum = display.textContent;
+    }
+
+    currentOperator = operator;
+    shouldResetDisplay = true;
+}
+
+function clearAll() {
+    firstNum = null;
+    secondNum = null;
+    currentOperator = null;
+    shouldResetDisplay = false;
+    display.textContent = "0";
+}
+
+// Listeners
+digitButtons.forEach(btn =>
     btn.addEventListener("click", () => appendNumber(btn.textContent))
 );
+
+operatorButtons.forEach(btn =>
+    btn.addEventListener("click", () => handleOperator(btn.textContent))
+);
+
+equalsButton.addEventListener("click", () => {
+   if (currentOperator !== null) handleOperator(null);
+});
+clearButton.addEventListener("click", clearAll);
