@@ -13,6 +13,8 @@ const equalsButton = document.getElementById("equals");
 
 const clearButton = document.getElementById("clear");
 
+const decimalButton = document.getElementById("decimal");
+
 // Operations
 function add(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
@@ -64,6 +66,17 @@ function handleOperator(operator) {
     shouldResetDisplay = true;
 }
 
+function appendDecimal() {
+    if(shouldResetDisplay) {
+        display.textContent = "0";
+        shouldResetDisplay = false;
+    }
+
+    if(!display.textContent.includes(".")) {
+        display.textContent += ".";
+    }
+}
+
 function clearAll() {
     firstNum = null;
     secondNum = null;
@@ -84,4 +97,7 @@ operatorButtons.forEach(btn =>
 equalsButton.addEventListener("click", () => {
    if (currentOperator !== null) handleOperator(null);
 });
+
+decimalButton.addEventListener("click", appendDecimal);
+
 clearButton.addEventListener("click", clearAll);
