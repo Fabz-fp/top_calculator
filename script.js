@@ -9,13 +9,13 @@ const digitButtons = document.querySelectorAll(".digit");
 
 const operatorButtons = document.querySelectorAll(".operator");
 
-const equalsButton = document.getElementById("equals");
-
-const clearButton = document.getElementById("clear");
-
 const decimalButton = document.getElementById("decimal");
 
 const backspaceButton = document.getElementById("backspace");
+
+const clearButton = document.getElementById("clear");
+
+const equalsButton = document.getElementById("equals");
 
 // Operations
 function add(a, b) { return a + b; }
