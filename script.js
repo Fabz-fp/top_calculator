@@ -15,6 +15,8 @@ const clearButton = document.getElementById("clear");
 
 const decimalButton = document.getElementById("decimal");
 
+const backspaceButton = document.getElementById("backspace");
+
 // Operations
 function add(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
@@ -85,6 +87,16 @@ function clearAll() {
     display.textContent = "0";
 }
 
+function backspace() {
+    if(shouldResetDisplay) return;
+
+    display.textContent = display.textContent.slice(0, -1);
+
+    if(display.textContent === "") {
+        display.textContent = "0";
+    }
+}
+
 // Listeners
 digitButtons.forEach(btn =>
     btn.addEventListener("click", () => appendNumber(btn.textContent))
@@ -101,3 +113,5 @@ equalsButton.addEventListener("click", () => {
 decimalButton.addEventListener("click", appendDecimal);
 
 clearButton.addEventListener("click", clearAll);
+
+backspaceButton.addEventListener("click", backspace);
