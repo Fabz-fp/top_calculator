@@ -4,17 +4,11 @@ let currentOperator = null;
 let shouldResetDisplay = false;
 
 const display = document.getElementById("display");
-
 const digitButtons = document.querySelectorAll(".digit");
-
 const operatorButtons = document.querySelectorAll(".operator");
-
 const decimalButton = document.getElementById("decimal");
-
 const backspaceButton = document.getElementById("backspace");
-
 const clearButton = document.getElementById("clear");
-
 const equalsButton = document.getElementById("equals");
 
 // Operations
@@ -115,3 +109,40 @@ decimalButton.addEventListener("click", appendDecimal);
 clearButton.addEventListener("click", clearAll);
 
 backspaceButton.addEventListener("click", backspace);
+
+// Keyboard support
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    if(e.ctrlKey || e.altKey) return;
+
+    if(/^[0-9]$/.test(key)) {
+        appendNumber(key);
+        return;
+    }
+
+    if(["+", "-", "*", "/"].includes(key)) {
+        handleOperator(key);
+        return;
+    }
+
+    if(key === ".") {
+        appendDecimal();
+        return;
+    }
+
+    if(key === "Enter" || key === "=") {
+        if (currentOperator !== null) handleOperator(null);
+        return;
+    }
+
+    if(key === "Backspace") {
+        backspace();
+        return;
+    }
+    
+    if(key === "Escape" || key === "c") {
+        clearAll();
+        return;
+    }
+});
